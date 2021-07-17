@@ -1,0 +1,25 @@
+{
+  "name": "generate-d-ts",
+  "version": "0.0.0",
+  "description": "generate d.ts by typescript api.",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "files": [
+    "index.js",
+    "index.d.ts"
+  ],
+  "peerDependencies": {
+    "typescript": "*"
+  },
+  "keywords": [
+    "typescript",
+    "d.ts"
+  ],
+  "author": "zhangyu1818",
+  "repository": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^16.3.3",
+    "typescript": "^4.3.5"
+  }
+}
