@@ -1,6 +1,6 @@
 {
   "name": "generate-d-ts",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "generate d.ts by typescript api.",
   "main": "index.js",
   "types": "index.d.ts",

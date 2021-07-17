@@ -1,6 +1,7 @@
 import * as ts from 'typescript'
 import { dirname } from 'path'
-import { existsSync, mkdirSync, writeFileSync } from 'fs'
+import { existsSync, mkdirSync } from 'fs'
+import { writeFile } from 'fs/promises'
 
 type CreatedFiles = { [key: string]: string }
 const createDeclarations = (filesPath: string[], outDir: string) => {
@@ -29,22 +30,16 @@ const createDeclarations = (filesPath: string[], outDir: string) => {
   return createdFiles
 }
 
-const writeDeclarations = (declarations: CreatedFiles): Promise<void> =>
-  new Promise((resolve, reject) => {
-    try {
-      for (const [declarationFilePath, declarationFileContent] of Object.entries(declarations)) {
-        const dir = dirname(declarationFilePath)
-        if (!existsSync(dir)) {
-          mkdirSync(dir)
-        }
-        writeFileSync(declarationFilePath, declarationFileContent, {
-          encoding: 'utf-8',
-        })
-      }
-    } catch (e) {
-      reject(e)
+const writeDeclarations = async (declarations: CreatedFiles) => {
+  for (const [declarationFilePath, declarationFileContent] of Object.entries(declarations)) {
+    const dir = dirname(declarationFilePath)
+    if (!existsSync(dir)) {
+      mkdirSync(dir)
     }
-    resolve()
-  })
+    await writeFile(declarationFilePath, declarationFileContent, {
+      encoding: 'utf-8',
+    })
+  }
+}
 
 export { createDeclarations, writeDeclarations }
